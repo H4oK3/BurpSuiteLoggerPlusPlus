@@ -1,7 +1,6 @@
 package loggerplusplus.userinterface;
 
 import burp.BurpExtender;
-import loggerplusplus.LogEntry;
 import loggerplusplus.LogManager;
 import loggerplusplus.userinterface.dialog.ColorFilterDialog;
 import loggerplusplus.userinterface.dialog.SavedFiltersDialog;
@@ -9,7 +8,6 @@ import loggerplusplus.userinterface.dialog.SavedFiltersDialog;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 /**
  * Created by corey on 24/08/17.
@@ -23,7 +21,8 @@ public class LogViewPanel extends JPanel {
     public LogViewPanel(LogManager logManager){
         this.setLayout(new GridBagLayout());
 
-        logTable = new LogTable(logManager);
+        LogTableModel tableModel = new LogTableModel(logManager);
+        logTable = new LogTable(tableModel);
         logTableScrollPane = new JScrollPane(logTable,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);//View
         logTableScrollPane.addMouseWheelListener(new MouseWheelListener() {
             @Override

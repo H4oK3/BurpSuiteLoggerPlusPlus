@@ -6,30 +6,30 @@ package loggerplusplus.userinterface;
 
 import burp.BurpExtender;
 import loggerplusplus.LogEntry;
-import loggerplusplus.LogEntryListener;
-import loggerplusplus.LogManager;
 import loggerplusplus.filter.ColorFilter;
 import loggerplusplus.filter.Filter;
 import loggerplusplus.filter.FilterListener;
 import loggerplusplus.userinterface.renderer.BooleanRenderer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.UIResource;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.table.TableStringConverter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class LogTable extends JTable implements FilterListener
 {
 
-    public LogTable(LogManager logManager)
+    public LogTable(LogTableModel tableModel)
     {
-        super(new LogTableModel(logManager), new LogTableColumnModel());
+        super(tableModel, new LogTableColumnModel());
         this.getModel().setColumnModel(this.getColumnModel());
         this.setTableHeader(new TableHeader (getColumnModel(),this)); // This was used to create tool tips
         this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // to have horizontal scroll bar

@@ -110,14 +110,6 @@ public class LogManager implements IHttpListener, IProxyListener {
         }
     }
 
-    private void logProxyRequest(IInterceptedProxyMessage proxyMessage, boolean messageIsRequest){
-
-    }
-
-    private void logOtherRequest(int toolFlag, IHttpRequestResponse requestResponse){
-
-    }
-
     private void addNewRequest(LogEntry logEntry){
         //After handling request / response logEntries generation.
         //Add to grepTable / modify existing entry.

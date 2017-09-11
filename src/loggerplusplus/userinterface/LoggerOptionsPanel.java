@@ -14,7 +14,6 @@ package loggerplusplus.userinterface;
 
 import burp.BurpExtender;
 import loggerplusplus.FileLogger;
-import loggerplusplus.LoggerPlusPlus;
 import loggerplusplus.LoggerPreferences;
 
 import javax.swing.*;
@@ -194,7 +193,7 @@ public class LoggerOptionsPanel extends JScrollPane{
         contentWrapper.add(lblMaxEntries, gbc);
         gbc.gridx++;
         final JSpinner spnMaxEntries = new JSpinner();
-        spnMaxEntries.setModel(new SpinnerNumberModel(BurpExtender.getLoggerInstance().getLoggerPreferences().getMaximumEntries(), 10, 20000, 10));
+        spnMaxEntries.setModel(new SpinnerNumberModel(BurpExtender.getLoggerInstance().getLoggerPreferences().getMaximumEntries(), 10, 1000000, 10));
         spnMaxEntries.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {

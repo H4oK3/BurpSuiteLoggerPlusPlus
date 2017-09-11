@@ -1,6 +1,9 @@
 package loggerplusplus;
 
-import burp.*;
+import burp.BurpExtender;
+import burp.IBurpExtenderCallbacks;
+import burp.IMessageEditor;
+import burp.ITab;
 import loggerplusplus.filter.Filter;
 import loggerplusplus.filter.FilterCompiler;
 import loggerplusplus.filter.FilterListener;
@@ -8,7 +11,7 @@ import loggerplusplus.userinterface.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Created by corey on 07/09/17.
@@ -40,9 +43,6 @@ public class LoggerPlusPlus implements ITab {
         if(!callbacks.isExtensionBapp() && loggerPreferences.checkUpdatesOnStartup()){
             MoreHelp.checkForUpdate(false);
         }
-
-        BurpExtender.getCallbacks().registerHttpListener(logManager);
-        BurpExtender.getCallbacks().registerProxyListener(logManager);
 
         buildUI();
     }
@@ -113,8 +113,6 @@ public class LoggerPlusPlus implements ITab {
                 tabbedWrapper.addTab("About", null, new AboutPanel(), null);
                 tabbedWrapper.addTab("Help", null, new HelpPanel(), null);
 
-                BurpExtender.getCallbacks().addSuiteTab(LoggerPlusPlus.this);
-
                 //Add menu item to Burp's frame menu.
                 JFrame rootFrame = (JFrame) SwingUtilities.getWindowAncestor(uiPopOutPanel);
                 try{
@@ -124,6 +122,10 @@ public class LoggerPlusPlus implements ITab {
                 }catch (NullPointerException nPException){
                     loggerMenu = null;
                 }
+
+                BurpExtender.getCallbacks().addSuiteTab(LoggerPlusPlus.this);
+                BurpExtender.getCallbacks().registerHttpListener(logManager);
+                BurpExtender.getCallbacks().registerProxyListener(logManager);
             }
         });
     }
